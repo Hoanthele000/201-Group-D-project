@@ -1,29 +1,93 @@
 import java.util.Random;
 
-public class Player {
-        String name;
-        String race;
-        int strength, vitality, intelligence, dexterity;
-        int health;
-        int maxHealth;
-        int baseWeaponDamage;
-        String equippedWeapon;
-        int gold;
-        String [] inventory;
 
-        public Player(String name, String race, String[] inventory) {
+/**
+ * Class to represent the user's character.
+ */
+public class Player {
+	
+		String name;
+        private int strength, vitality, intelligence, dexterity;
+        private int health;
+        private int maxHealth;
+        private Weapon equippedWeapon;
+        private int gold;
+        private Item[] inventory;
+
+        /**
+         * Constructor for a player object, takes a name and race to initialize stats.
+         * @param name -the player's name
+         * @param race -a parameter that affect starting stats.
+         */
+        public Player(String name, String race) {
             this.name = name;
-            this.race = race;
             this.gold = 1000;
-            this.inventory = inventory;
-            initializeStats();
+            this.inventory = new Item[15];
+            initializeStats(race);
         }
         
-        /* public void addItem (inventory) // todo : need to initialize a inventory with all items of the user and pass it through here
-        {
+        /**
+         * Damages the player by reducing their health and checks for a game over. 
+         * @param damage -the amount of damage to be dealt to the player
+         */
+        public void damage(int damage) {
+        	health -= damage;
+        	if (health <= 0) {
+                System.out.println("You have been defeated!");
+                gameOver();
+            }
+        }
+        /** 
+         * Adds an item to the player inventory if there is an open slot.
+         * Otherwise, tells the player that the inventory is full
+         * @param item -the item to be added to the inventory.
+         */
+        public void addItem(Item item) {
+        	if (inventory.length == 15) {
+        		System.out.println("Inventory full, unable to add item.");
+        	} else {
+        		for (int i = 0; i < inventory.length; i++) {
+        			if (inventory[i] == null) {
+        				inventory[i] = item;
+        			} 
+        		}
+        	}
+        }
+        
+        /**
+         * Consumes potion or equips weapon in the given slot.
+         * @param index - the posistion of the item to be used.
+         */
+        public void useItem(int index) {
+        	if (inventory[index].getName().equals("potion")) {
+        		heal(10);
+        		inventory[index] = null;
+        	}
+        	if (inventory[index] instanceof Weapon) {
+        		equipWeapon((Weapon) inventory[i]);
+        	}        	
+    	}
+        
+        
+        /**
+         * Heals the player to no more than maxHealth
+         * @param i - the amount to be healed
+         */
+        public void heal(int i) {
+			if (i + health >= maxHealth) {
+				health = maxHealth;
+			} else {
+				health += i;
+			}
+			
+		}
 
-        } */
-        public boolean spendGold(int amount) {
+        /**
+         * Allows the player to spend gold
+         * @param amount the amount to spend
+         * @return a success or fail message in accordance to the result.
+         */
+		public boolean spendGold(int amount) {
             if (gold >= amount) {
                 gold -= amount;
                 System.out.println("You spent " + amount + " gold. Remaining gold: " + gold);
@@ -34,25 +98,17 @@ public class Player {
             }
         }
         
-        public void equipWeapon(String weapon) {
+		/**
+		 * Equips a weapon 
+		 * @param weapon the weapon to equip
+		 */
+        public void equipWeapon(Weapon weapon) {
             this.equippedWeapon = weapon;
-            switch (weapon.toLowerCase()) {
-                case "basic greatsword":
-                case "basic longsword":
-                    baseWeaponDamage = 5 + strength; // Scales with strength : todo : change off of 1x scaling in stats maybe
-                    break;
-                case "basic staff":
-                    baseWeaponDamage = 5 + intelligence; // Scales with intelligence
-                    break;
-                case "basic longbow":
-                    baseWeaponDamage = 5 + dexterity; // Scales with dexterity
-                    break;
-                default:
-                    baseWeaponDamage = 5; // Default base damage
-                    break;
-            }
         }
         
+        /**
+         * Displays relevant player information
+         */
         public void displayStats() {
             System.out.println("Stats: ");
             System.out.println("Health: " + health + "/" + maxHealth);
@@ -60,35 +116,56 @@ public class Player {
             System.out.println("Vitality: " + vitality);
             System.out.println("Intelligence: " + intelligence);
             System.out.println("Dexterity: " + dexterity);
-            System.out.println("Equipped Weapon: " + equippedWeapon);
-            System.out.println("Weapon Damage: " + baseWeaponDamage);
+            System.out.println("Equipped Weapon: " + equippedWeapon.getName());
+            System.out.println("Weapon Damage: " + equippedWeapon.getPower());
             System.out.println("Gold: " + gold);
         }
+        
+        
         public int calculateDamage() {
-            return baseWeaponDamage + strength;
+        	if (equippedWeapon != null) {
+        		return equippedWeapon.getPower() + strength;
+        	}
+            return strength;
         }
         
+        /**
+         * Ends the game and prints a loss message.
+         */
         public void gameOver() {
             System.out.println("Your HP has reached 0. Game Over.");
             System.exit(0); // Terminate the game
         }
+        
+        
+        /**
+         * allows player to dodge incoming attacks
+         * @return
+         */
         public boolean dodgeAttack() {
             Random rand = new Random();
             return rand.nextInt(100) < dexterity; // Dexterity % chance to dodge
         }
 
-        
-
+        /**
+         * Adds gold to the player
+         * @param amount -the amount to add
+         */
         public void addGold(int amount) {
             gold += amount;
             System.out.println("You earned " + amount + " gold. Current gold: " + gold);
         }
         
-        boolean Flee() {
+        /**
+         * allows player to flee from combat
+         * @return true if successful, false otherwise
+         */
+        public boolean Flee() {
             Random random = new Random();
             return random.nextInt(12) + 1 >= 6; // Flee success on 6 or higher
         }
-        private void initializeStats() {
+        
+        private void initializeStats(String race) {
             switch (race.toLowerCase()) {
                 case "barbarian":
                     strength = 10;
@@ -123,8 +200,14 @@ public class Player {
             }
             maxHealth = 10 + vitality;
             health = maxHealth;
-            equippedWeapon = "none";
-            baseWeaponDamage = 0; // This will change based on equipped weapon
         }
+        
+        /**
+         * Returns the amount of gold the player has
+         * @return the player's gold
+         */
+		public int getGold() {
+			return gold;
+		}
 
 }
