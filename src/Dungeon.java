@@ -6,7 +6,7 @@ public class Dungeon {
 	int playerX; // Column
     int playerY; // Row
     Room currentRoom;
-    
+
     
     /**
      * Constructor for the dungeon.
@@ -74,14 +74,11 @@ public class Dungeon {
     public void printDungeon() {
         for (Room[] row : dungeon) {
             for (Room room : row) {
-            	if (room.isCleared()) {
-            		if (room == currentRoom) {
-            			System.out.print("* "); //shows current location
-            		} else {
-            			System.out.print(room.getClear() + " ");
-            		}
+            	if (room.equals(currentRoom)) {
+            		System.out.print("* ");
+            	} else {
+            		System.out.print(room.getClear() + " "); 
             	}
-                
             }
             System.out.println();
         }
