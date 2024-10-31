@@ -7,6 +7,10 @@ public class Dungeon {
     int playerY; // Row
     Room currentRoom;
     
+    
+    /**
+     * Constructor for the dungeon.
+     */
 	Dungeon() {
 		for (int i = 0; i < dungeon.length; i++) {
             for (int j = 0; j < dungeon[i].length; j++) {
@@ -20,6 +24,11 @@ public class Dungeon {
 	}
 	
 	
+	/**
+	 * Handles movement inputs to move the player between rooms.
+	 * @param scanner takes user inputs
+	 * @return returns false if the user chooses to quit, true otherwise.
+	 */
 	public boolean Move(Scanner scanner){
 		// Get player input
         System.out.println("Move your character (W/A/S/D to move, Q to quit): "); // todo : make it so that you can't go to previous rooms or that you cant fight enemies as those rooms should be flagged as "cleared".
@@ -51,15 +60,26 @@ public class Dungeon {
         return false;
 	}
 	
+	/**
+	 * Returns the room that the player is in
+	 * @return
+	 */
 	public Room getRoom() {
 		return currentRoom;
 	}
-    // Method to print the dungeon grid
+	
+    /**
+     * prints the dungeon grid with ? being unexplored rooms and ! being cleared rooms
+     */
     public void printDungeon() {
         for (Room[] row : dungeon) {
             for (Room room : row) {
             	if (room.isCleared()) {
-            		System.out.print(room.getClear() + " ");
+            		if (room == currentRoom) {
+            			System.out.print("* "); //shows current location
+            		} else {
+            			System.out.print(room.getClear() + " ");
+            		}
             	}
                 
             }
