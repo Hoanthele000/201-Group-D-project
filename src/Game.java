@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.Random;
+
+/**
+ * Primary class that runs the game
+ */
 public class Game {
     public static void main(String[] args) {
         Random rand = new Random();
@@ -13,7 +17,10 @@ public class Game {
     }
     
 
-
+    /**
+     * Starts and runs the game.
+     * @param scanner takes user inputs
+     */
     static void playGame(Scanner scanner) {
         Dungeon dungeon = new Dungeon();
         boolean gameIsOver = false;
@@ -24,29 +31,28 @@ public class Game {
         System.out.println("Please select your character's race: " +
                 "Barbarian (+10 STR), Wizard (+10 INT), Warrior (+10 VIT), Ranger (+10 DEX)");
         String characterRace = scanner.nextLine();
-        if (!characterRace.equalsIgnoreCase("barbarian") || !characterRace.equalsIgnoreCase("wizard")
-                || !characterRace.equalsIgnoreCase("warrior") || !characterRace.equalsIgnoreCase("ranger")) {
+        if (!(characterRace.equalsIgnoreCase("barbarian") || characterRace.equalsIgnoreCase("wizard")
+                || characterRace.equalsIgnoreCase("warrior") || characterRace.equalsIgnoreCase("ranger"))) {
             System.out.println("Not a valid input, please try again..."); // this block doesnt actually have user try again
         }
         Player player = new Player(characterName, characterRace);
         // Shopping phase before the dungeon
         storePhase(player, scanner);
         
-        
+
         // Game loop
-        while (!gameIsOver) {
+        do {
             // Display the dungeon to the user
             dungeon.printDungeon();
             // Allow player to move
             gameIsOver = dungeon.Move(scanner);
 
-             if (dungeon.getRoom().getType().equals("monster")) { 
+             if (dungeon.getRoom().getType().equals("monster") && !gameIsOver) { 
                 Enemy enemy = dungeon.getRoom().getEnemy();
                 battle(player, enemy, scanner);
              }
-
          
-        }
+        } while (!gameIsOver);
         scanner.close();
 
     }
@@ -122,7 +128,7 @@ public class Game {
                     System.out.println("Invalid choice, please try again.");
                     break;
             }
-        } while (keepGoing == false);
+        } while (keepGoing != false);
     }
 
         static String generateRandomEnemy() {
@@ -169,7 +175,7 @@ public class Game {
                         break;
                     case "check inventory":
                         System.out.println("Your inventory contains: ");
-                        // Display inventory (for now assume basic) does nothing for now ...
+                        player.printInventory();
                         break;
                     default:
                         System.out.println("Invalid action. Please choose again.");
