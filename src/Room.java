@@ -6,8 +6,8 @@ public class Room {
 	String clear;
 	
 	/**
-	 * creates a room 
-	 * @param type
+	 * Creates a room object
+	 * @param type can be monster room, boss room, healing room, etc. Add types as needed
 	 */
 	Room(String type){
 		this.type = type;
@@ -20,20 +20,43 @@ public class Room {
 		
 		clear = "?";
 	}
+
 	
+	/**
+	 * Returns the enemy in the room
+	 * @return enemy
+	 */
 	public Enemy getEnemy() {
 		return enemy;
 	}
+	
+	/**
+	 * Sets the room's status to clear.
+	 */
 	public void clearRoom() {
 		clear = "!";
 	}
+	
+	/**
+	 * Returns the type of room
+	 * @return type
+	 */
 	public String getType(){
 		return type;
 	}
+	
+	/**
+	 * Returns the clear status the room
+	 * @return ? if uncleared, ! if cleared.  Other symbols can be used later
+	 */
 	public String getClear(){
 		return clear;
 	}
 	
+	/**
+	 * Determines whether the room is cleared
+	 * @return true if clears, false otherwise.
+	 */
 	public boolean isCleared() {
 		if (!clear.equals("?")) {
 			return true;
