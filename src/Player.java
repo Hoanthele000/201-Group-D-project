@@ -64,7 +64,7 @@ public class Player {
         		inventory[index] = null;
         	}
         	if (inventory[index] instanceof Weapon) {
-        		equipWeapon((Weapon) inventory[i]);
+        		equipWeapon((Weapon) inventory[index]);
         	}        	
     	}
         
