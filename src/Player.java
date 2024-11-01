@@ -2,16 +2,22 @@ import java.util.Random;
 
 
 /**
- * Class to represent the user's character.
- */
+* Class: Player
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Creates a player object that represents the user's character in the game.
+* It stores the character's stats, gold, and items/inventory.
+*/
 public class Player {
 	
-	String name;
-        private int strength, vitality, intelligence, dexterity;
-        private int health;
-        private int maxHealth;
-        private Weapon equippedWeapon;
-        private int gold;
+	String name; // player's name
+        private int strength, vitality, intelligence, dexterity; // various stats to affect game actions
+        private int health; // the player's health
+        private int maxHealth; // the maximum health the player can hav
+        private Weapon equippedWeapon; // the wepon being used
+        private int gold; 
         private Item[] inventory;
 
         /**
@@ -37,21 +43,37 @@ public class Player {
                 	gameOver();
             	}
         }
+
+
+	/**
+         * Prints the contents of player's inventory
+         */
+        public void printInventory() {
+        	for (int i = 0; i < inventory.length; i++) {
+        		if (inventory[i] != null) {
+        			System.out.print("[  " + inventory[i].getName() + "  ]");
+        		}
+        		System.out.println();
+        	}
+        }
+	
         /** 
          * Adds an item to the player inventory if there is an open slot.
          * Otherwise, tells the player that the inventory is full
          * @param item -the item to be added to the inventory.
          */
         public void addItem(Item item) {
-        	if (inventory.length == 15) {
-        		System.out.println("Inventory full, unable to add item.");
-        	} else {
-        		for (int i = 0; i < inventory.length; i++) {
-        			if (inventory[i] == null) {
-        				inventory[i] = item;
-        			} 
-        		}
+        	boolean full = true;
+        	for (int i = 0; i < inventory.length; i++) {
+        		if (inventory[i] == null && full) {
+        			inventory[i] = item;
+        			full = false;
+        		} 
         	}
+        	if (full) {
+        		System.out.println("Inventory full, unable to add item.");
+        	}
+        	
         }
         
         /**
@@ -71,13 +93,13 @@ public class Player {
         
         /**
          * Heals the player to no more than maxHealth
-         * @param i - the amount to be healed
+         * @param amount - the amount to be healed
          */
-        public void heal(int i) {
-		if (i + health >= maxHealth) {
+        public void heal(int amount) {
+		if (amount + health >= maxHealth) {
 			health = maxHealth;
 		} else {
-			health += i;
+			health += amount;
 		}
 	}
 
@@ -112,7 +134,6 @@ public class Player {
             	System.out.println("Stats: ");
             	System.out.println("Health: " + health + "/" + maxHealth);
             	System.out.println("Strength: " + strength);
-            	System.out.println("Vitality: " + vitality);
             	System.out.println("Intelligence: " + intelligence);
             	System.out.println("Dexterity: " + dexterity);
             	System.out.println("Equipped Weapon: " + equippedWeapon.getName());
@@ -120,7 +141,10 @@ public class Player {
             	System.out.println("Gold: " + gold);
         }
         
-        
+        /**
+         * Determines how much damage the player will deal.
+         * @return the damage to deal
+         */
         public int calculateDamage() {
         	if (equippedWeapon != null) {
         		return equippedWeapon.getPower() + strength;
@@ -161,7 +185,7 @@ public class Player {
          */
         public boolean Flee() {
             Random random = new Random();
-            return random.nextInt(12) + 1 >= 6; // Flee success on 6 or higher
+            return random.nextInt(12) + dexterity >= 6; // Flee success on 6 or higher
         }
         
         private void initializeStats(String race) {
@@ -205,8 +229,15 @@ public class Player {
          * Returns the amount of gold the player has
          * @return the player's gold
          */
-		public int getGold() {
-			return gold;
-		}
-
+	public int getGold() {
+		return gold;
+	}
+	
+	/**
+	* Returns the current player health
+	* @return health
+	*/
+	public int getHealth() {
+		return health;
+	}
 }
