@@ -41,7 +41,7 @@ public class Dungeon {
                 if (col > 0) col--;
                 break;
             case "s": // Move down
-                if (col < 7) col;
+                if (col < 7) col++;
                 break;
             case "a": // Move left
                 if (row > 0) row--;
