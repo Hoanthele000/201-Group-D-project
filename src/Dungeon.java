@@ -18,9 +18,9 @@ public class Dungeon {
             }
             
         }
-		playerX = 7;
-		playerY = 0;
-		currentRoom = dungeon[playerX][playerY];
+		col = 7;
+		row = 0;
+		currentRoom = dungeon[col][row];
 	}
 	
 	
@@ -38,16 +38,16 @@ public class Dungeon {
         // Update player position based on input
         switch (move) {
             case "w": // Move up
-                if (playerX > 0) playerX--;
+                if (col > 0) col--;
                 break;
             case "s": // Move down
-                if (playerX < 7) playerX++;
+                if (col < 7) col;
                 break;
             case "a": // Move left
-                if (playerY > 0) playerY--;
+                if (row > 0) row--;
                 break;
             case "d": // Move right
-                if (playerY < 7) playerY++;
+                if (row < 7) row++;
                 break;
             case "q": // Quit the game
                 System.out.println("You have quit the game.");
@@ -56,7 +56,7 @@ public class Dungeon {
                 System.out.println("Invalid input. Please use W/A/S/D to move or Q to quit.");
                 break;
         }
-        currentRoom = dungeon[playerX][playerY];
+        currentRoom = dungeon[col][row];
         return false;
 	}
 	
