@@ -6,7 +6,7 @@ import java.util.Random;
  */
 public class Player {
 	
-		String name;
+	String name;
         private int strength, vitality, intelligence, dexterity;
         private int health;
         private int maxHealth;
@@ -20,10 +20,10 @@ public class Player {
          * @param race -a parameter that affect starting stats.
          */
         public Player(String name, String race) {
-            this.name = name;
-            this.gold = 1000;
-            this.inventory = new Item[15];
-            initializeStats(race);
+            	this.name = name;
+            	this.gold = 1000;
+            	this.inventory = new Item[15];
+            	initializeStats(race);
         }
         
         /**
@@ -33,9 +33,9 @@ public class Player {
         public void damage(int damage) {
         	health -= damage;
         	if (health <= 0) {
-                System.out.println("You have been defeated!");
-                gameOver();
-            }
+                	System.out.println("You have been defeated!");
+                	gameOver();
+            	}
         }
         /** 
          * Adds an item to the player inventory if there is an open slot.
@@ -74,51 +74,50 @@ public class Player {
          * @param i - the amount to be healed
          */
         public void heal(int i) {
-			if (i + health >= maxHealth) {
-				health = maxHealth;
-			} else {
-				health += i;
-			}
-			
+		if (i + health >= maxHealth) {
+			health = maxHealth;
+		} else {
+			health += i;
 		}
+	}
 
         /**
          * Allows the player to spend gold
          * @param amount the amount to spend
          * @return a success or fail message in accordance to the result.
          */
-		public boolean spendGold(int amount) {
-            if (gold >= amount) {
-                gold -= amount;
-                System.out.println("You spent " + amount + " gold. Remaining gold: " + gold);
-                return true;
-            } else {
-                System.out.println("You don't have enough gold!");
-                return false;
-            }
+	public boolean spendGold(int amount) {
+            	if (gold >= amount) {
+                	gold -= amount;
+                	System.out.println("You spent " + amount + " gold. Remaining gold: " + gold);
+                	return true;
+            	} else {
+                	System.out.println("You don't have enough gold!");
+                	return false;
+            	}
         }
         
-		/**
-		 * Equips a weapon 
-		 * @param weapon the weapon to equip
-		 */
+	/**
+	 * Equips a weapon 
+	 * @param weapon the weapon to equip
+	 */
         public void equipWeapon(Weapon weapon) {
-            this.equippedWeapon = weapon;
+            	this.equippedWeapon = weapon;
         }
         
         /**
          * Displays relevant player information
          */
         public void displayStats() {
-            System.out.println("Stats: ");
-            System.out.println("Health: " + health + "/" + maxHealth);
-            System.out.println("Strength: " + strength);
-            System.out.println("Vitality: " + vitality);
-            System.out.println("Intelligence: " + intelligence);
-            System.out.println("Dexterity: " + dexterity);
-            System.out.println("Equipped Weapon: " + equippedWeapon.getName());
-            System.out.println("Weapon Damage: " + equippedWeapon.getPower());
-            System.out.println("Gold: " + gold);
+            	System.out.println("Stats: ");
+            	System.out.println("Health: " + health + "/" + maxHealth);
+            	System.out.println("Strength: " + strength);
+            	System.out.println("Vitality: " + vitality);
+            	System.out.println("Intelligence: " + intelligence);
+            	System.out.println("Dexterity: " + dexterity);
+            	System.out.println("Equipped Weapon: " + equippedWeapon.getName());
+            	System.out.println("Weapon Damage: " + equippedWeapon.getPower());
+            	System.out.println("Gold: " + gold);
         }
         
         
@@ -126,15 +125,15 @@ public class Player {
         	if (equippedWeapon != null) {
         		return equippedWeapon.getPower() + strength;
         	}
-            return strength;
+            	return strength;
         }
         
         /**
          * Ends the game and prints a loss message.
          */
         public void gameOver() {
-            System.out.println("Your HP has reached 0. Game Over.");
-            System.exit(0); // Terminate the game
+        	System.out.println("Your HP has reached 0. Game Over.");
+            	System.exit(0); // Terminate the game
         }
         
         
@@ -143,8 +142,8 @@ public class Player {
          * @return
          */
         public boolean dodgeAttack() {
-            Random rand = new Random();
-            return rand.nextInt(100) < dexterity; // Dexterity % chance to dodge
+            	Random rand = new Random();
+            	return rand.nextInt(100) < dexterity; // Dexterity % chance to dodge
         }
 
         /**
@@ -152,8 +151,8 @@ public class Player {
          * @param amount -the amount to add
          */
         public void addGold(int amount) {
-            gold += amount;
-            System.out.println("You earned " + amount + " gold. Current gold: " + gold);
+            	gold += amount;
+            	System.out.println("You earned " + amount + " gold. Current gold: " + gold);
         }
         
         /**
