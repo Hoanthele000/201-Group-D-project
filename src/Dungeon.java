@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Dungeon {
 
 	Room[][] dungeon = new Room[8][8];
-	int playerX; // Column
-    int playerY; // Row
+	int col;
+    int row;
     Room currentRoom;
 
     
