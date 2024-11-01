@@ -17,11 +17,9 @@ public class Room {
 		if (type.equals("boss")){
 			this.enemy = new Enemy("Zargotrax, master of darkness"); // also to be altered with enemy class. should be a set boss
 		}
-		
 		clear = "?";
 	}
 
-	
 	/**
 	 * Returns the enemy in the room
 	 * @return enemy
