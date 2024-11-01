@@ -6,11 +6,14 @@
  */
 public class Enemy {
 	
-		// Variable for Enemy class
-        String type;
-        int health;
+	// Variable for Enemy class
+        String type; // the type of enemy
+        int health; // the current health of the enemy
 
-        // Constructor for Enemy class
+        /**
+         * Constructor for Enemy class
+         * @param type the type of enemy to create
+         */
         public Enemy(String type) {
             this.type = type;
             this.health = 20; // Default health for all enemies
@@ -32,8 +35,8 @@ public class Enemy {
                 System.out.println("You dodged the attack!");
             } else {
                 System.out.println("The enemy attacks you!");
-                player.health -= 5; // Fixed enemy damage for now
-                if (player.health <= 0) {
+                player.damage(5); // Fixed enemy damage for now
+                if (player.getHealth() <= 0) {
                     System.out.println("You have been defeated!");
                     player.gameOver();
                 }
