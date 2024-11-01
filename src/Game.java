@@ -31,14 +31,15 @@ public class Game {
         System.out.println("Please select your character's race: " +
                 "Barbarian (+10 STR), Wizard (+10 INT), Warrior (+10 VIT), Ranger (+10 DEX)");
         String characterRace = scanner.nextLine();
-        if (!(characterRace.equalsIgnoreCase("barbarian") || characterRace.equalsIgnoreCase("wizard")
+        
+        while (!(characterRace.equalsIgnoreCase("barbarian") || characterRace.equalsIgnoreCase("wizard")
                 || characterRace.equalsIgnoreCase("warrior") || characterRace.equalsIgnoreCase("ranger"))) {
-            System.out.println("Not a valid input, please try again..."); // this block doesnt actually have user try again
+            System.out.println("Not a valid input, please try again..."); 
+            String characterRace = scanner.nextLine();
         }
         Player player = new Player(characterName, characterRace);
         // Shopping phase before the dungeon
-        storePhase(player, scanner);
-        
+        storePhase(player, scanner);        
 
         // Game loop
         do {
@@ -83,19 +84,26 @@ public class Game {
                     int totalCost = quantity * 50;
                     if (player.spendGold(totalCost)) {
                         System.out.println("You purchased " + quantity + " " + choice + "(s).");
-                        System.out.println("Would you like to purchase anything else?\n\"Yes\"\n\"No \"");
-                        String choice2 = scanner.nextLine();
-                        switch (choice2.toLowerCase()) {
-                            case "yes":
-                                keepGoing = true;
-                                break;
-                            case "no":
-                                keepGoing = false;
-                                break;
-                            default:
-                                System.out.println("Invalid input...");
-                                break;
+                        for (int i = 0; i < 10; i++) {
+                        	player.addItem(new Item("potion"));
                         }
+                        System.out.println("Would you like to purchase anything else?\n\"Yes\"\n\"No \"");
+                        do {
+                            String choice2 = scanner.nextLine();
+                            boolean valid = true;
+                            switch (choice2.toLowerCase()) {
+                                case "yes":
+                                    keepGoing = true;
+                                    break;
+                                case "no":
+                                    keepGoing = false;
+                                    break;
+                                default:
+                                    System.out.println("Invalid input...");
+                                    valid = false;
+                                    break;
+                            } 
+                        } while (valid == false);
                     }
                     break;
                 case "basic greatsword":
@@ -104,13 +112,14 @@ public class Game {
                 case "basic staff":
                     if (player.spendGold(500)) {
                         System.out.println("You have purchased a " + choice + ".");
+                        player.addItem(new Weapon(choice,5);
                         System.out.println("Would you like to equip it? (yes/no)");
                         String equipChoice = scanner.nextLine().toLowerCase();
-                    if (equipChoice.equals("yes")) {
-                        player.equipWeapon(new Weapon(choice,5));
-                        System.out.println("You equipped the " + choice + ".");
+                        if (equipChoice.equals("yes")) {
+                            player.equipWeapon(new Weapon(choice,5));
+                            System.out.println("You equipped the " + choice + ".");
+                        }
                     }
-                }
                     System.out.println("Would you like to purchase anything else?\n \" Yes\" \n \" No \"");
                     String choice2 = scanner.nextLine();
                     switch (choice2.toLowerCase()) {
