@@ -1,5 +1,5 @@
 
-public class Weapon {
+public class Weapon extends Item{
  	int power;
 	
 	/**
