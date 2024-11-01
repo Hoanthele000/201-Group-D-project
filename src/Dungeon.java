@@ -29,14 +29,14 @@ public class Dungeon {
 	 * @param scanner takes user inputs
 	 * @return returns false if the user chooses to quit, true otherwise.
 	 */
-	public boolean Move(Scanner scanner){
+	public boolean move(Scanner scanner){
 		// Get player input
         System.out.println("Move your character (W/A/S/D to move, Q to quit): "); // todo : make it so that you can't go to previous rooms or that you cant fight enemies as those rooms should be flagged as "cleared".
-        String move = scanner.nextLine().toLowerCase();
+        String mov = scanner.nextLine().toLowerCase();
 
         
         // Update player position based on input
-        switch (move) {
+        switch (mov) {
             case "w": // Move up
                 if (col > 0) col--;
                 break;
