@@ -1,5 +1,5 @@
 import java.util.Random;
-
+import java.util.Scanner;
 
 /**
 * Class: Player
@@ -45,15 +45,23 @@ public class Player {
         }
 
 
-	/**
-         * Prints the contents of player's inventory
+	  /**
+         * Prints the contents of player's inventory and allows player to use an item
          */
-        public void printInventory() {
+        public void printInventory(Scanner scanner) {
+        	int index = 0;
         	for (int i = 0; i < inventory.length; i++) {
         		if (inventory[i] != null) {
-        			System.out.print("[  " + inventory[i].getName() + "  ]");
+        			System.out.print("slot "+ index + ": [  " + inventory[i].getName() + "  ]");
+        			System.out.println();
+        			index++;
         		}
-        		System.out.println();
+        		
+        	}
+        	System.out.println("Enter the slot number of the item you would like to equip");
+        	int choice = scanner.nextInt();
+        	if (inventory[choice] != null) {
+        		useItem(choice);
         	}
         }
 	
@@ -183,10 +191,17 @@ public class Player {
          * allows player to flee from combat
          * @return true if successful, false otherwise
          */
-        public boolean Flee() {
-            Random random = new Random();
-            return random.nextInt(12) + dexterity >= 6; // Flee success on 6 or higher
-        }
+        public boolean Flee(Enemy enemy) { 	
+            Random random = new Random();          
+            if (random.nextInt(12) + dexterity >= 6) {
+               System.out.println("You successfully fled the battle!");
+               return true;
+            } else {
+                System.out.println("Failed to flee! You've been counterattacked!");
+                enemy.enemyAttacks(this);
+                return false;
+            }
+	}
         
         private void initializeStats(String race) {
             switch (race.toLowerCase()) {
