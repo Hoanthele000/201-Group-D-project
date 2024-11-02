@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 /**
-* Class: Player
+* Class: Store
 * @author Group D
 * @version 1.0
 * Course : CSE 201 Fall 2024
@@ -10,10 +10,6 @@ import java.util.Scanner;
 * Purpose: Creates a store object that allows the user to buy items and weapons, 
 */
 public class Store {
-	
-	
-	
-	
 	
 	/**
 	 * Default constructor, doesn't do anything right now, could be useful later.
@@ -52,12 +48,14 @@ public class Store {
             switch (choice.toLowerCase()) {
                 case "yes":
                     result = true;
+                    valid = true;
                     break;
                 case "no":
                     result = false;
+                    valid = true;
                     break;
                 default:
-                    System.out.println("Invalid input...");
+                    System.out.println("Invalid input, try again");
                     valid = false;
                     break;
             } 
@@ -72,7 +70,6 @@ public class Store {
 	 */
 	 public void storePhase(Player player, Scanner scanner) {
 	        boolean keepGoing = true;
-
 	        do {
 	            printStore(player);
 	            String choice = scanner.nextLine().toLowerCase();          
@@ -99,32 +96,34 @@ public class Store {
 	
 	/**
 	 * Handles item purchasing, and adds/ equips items as necessary.
-	 * @param choice 
-	 * @param player
-	 * @param scanner
-	 * @return
+	 * @param choice the user's choice
+	 * @param player the user's character
+	 * @param scanner takes user inputs
+	 * @return false if player is done shopping, true otherwise.
 	 */
 	private boolean buyItem(String choice, Player player, Scanner scanner) {		
 		if (validItem(choice)) {
 			System.out.println("How many would you like to buy?");
             int quantity = Integer.parseInt(scanner.nextLine());
-            int totalCost = quantity * 50;
-            if (player.spendGold(totalCost)) {
-                System.out.println("You purchased " + quantity + " " + choice + "(s).");
-                for (int i = 0; i < quantity; i++) {
-                	if (choice.equals("health potion")) {
-                    	player.addItem(new Item(choice));
-                    } else {
-                    	player.addItem(new Weapon(choice, 5));
-                    	System.out.println("Would you like to equip it? (yes/no)");
-                        boolean equipChoice = getYesNo(scanner);
-                        if (equipChoice) {
-                            player.equipWeapon(new Weapon(choice,5));
-                            System.out.println("You equipped the " + choice + ".");
-                        }
+            
+            System.out.println("You purchased " + quantity + " " + choice + "(s).");               
+            if (choice.equals("health potion")) {
+            	if (player.spendGold(quantity * 50)) {
+            		for (int i = 0; i < quantity; i++) {
+                        player.addItem(new Item(choice));
+            		}
+                }
+            } else {
+            	if (player.spendGold(quantity * 500)) {
+            		player.addItem(new Weapon(choice, 5));
+                    System.out.println("Would you like to equip it? (yes/no)");
+                    boolean equipChoice = getYesNo(scanner);
+                    if (equipChoice) {
+                    	player.equipWeapon(new Weapon(choice,5));
+                        System.out.println("You equipped the " + choice + ".");
                     }
-                }               
-            }
+                }
+            }  
             System.out.println("Would you like to purchase anything else?\n \" Yes\" \n \" No \"");
             return getYesNo(scanner);
 		} else {
