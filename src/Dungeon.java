@@ -1,11 +1,20 @@
 import java.util.Scanner;
 
+/**
+* Class: Dungeon
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: creates a dungeon object that keeps track of 
+* the current location of the player, and allows the player to move to various rooms.
+*/
 public class Dungeon {
 
-	Room[][] dungeon = new Room[8][8];
-	int col;
-    	int row;
-    	Room currentRoom;
+	Room[][] dungeon = new Room[8][8]; // 2d array of rooms that represents the dungeon
+	int col; // the current column of the player
+    	int row; // the current row of the player
+    	Room currentRoom; //the room the player is in
 
     
     	/**
@@ -13,14 +22,16 @@ public class Dungeon {
      	*/
 	Dungeon() {
 		for (int i = 0; i < dungeon.length; i++) {
-            	for (int j = 0; j < dungeon[i].length; j++) {
-                	dungeon[i][j] = new Room("monster");
-            	}
-            
+            		for (int j = 0; j < dungeon[i].length; j++) {
+                		dungeon[i][j] = new Room("monster");
+			}            
         	}
+		
 		col = 7;
 		row = 0;
 		currentRoom = dungeon[col][row];
+		dungeon[0][7] = new Room("boss");
+		currentRoom.clearRoom();
 	}
 	
 	
@@ -62,7 +73,7 @@ public class Dungeon {
 	
 	/**
 	 * Returns the room that the player is in
-	 * @return
+	 * @return the current room
 	 */
 	public Room getRoom() {
 		return currentRoom;
