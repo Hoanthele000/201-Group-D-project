@@ -1,23 +1,32 @@
 
-public class Weapon extends Item {
- 	int power;
+/**
+* Class: Item
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Represents a consumable item or weapon that the player stores in their inventory.
+*/
+public class Item {
+	
+	
+	private String name; // the name of the item
 	
 	/**
-	 * Constructor for weapon class.
-	 * @param name the weapon's name
-	 * @param power the weapon's power
+	 * Constructor that sets the item's name
+	 * @param name
 	 */
-	Weapon(String name, int power){
-		super(name);
-		this.power = power;
-		
+	Item(String name){
+		this.name = name;
 	}
+
 	
 	/**
-	 * Returns the weapon's power
-	 * @return power
+	 * Getter method for the item name
+	 * @return name
 	 */
-	public int getPower() {
-		return power;
+	public String getName() {
+		return name;
 	}
+	
 }
