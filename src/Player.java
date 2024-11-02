@@ -187,10 +187,10 @@ public class Player {
     }
         
     /**
-     * allows player to flee from combat
+     * Allows player to flee from combat
      * @return true if successful, false otherwise
      */
-    public boolean Flee(Enemy enemy) { 	
+    public boolean flee(Enemy enemy) { 	
         Random random = new Random();          
         if (random.nextInt(12) + dexterity >= 6) {
            System.out.println("You successfully fled the battle!");
