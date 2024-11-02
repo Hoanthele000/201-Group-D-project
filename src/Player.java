@@ -45,7 +45,7 @@ public class Player {
     }
 
 
-	/**
+     /**
      * Prints the contents of player's inventory and allows player to use an item
      */
     public void printInventory(Scanner scanner) {
@@ -55,8 +55,7 @@ public class Player {
         		System.out.print("slot "+ index + ": [  " + inventory[i].getName() + "  ]");
         		System.out.println();
         		index++;
-        	}
-        		
+        	}  		
         }
         System.out.println("Enter the slot number of the item you would like to equip");
         int choice = scanner.nextInt();
