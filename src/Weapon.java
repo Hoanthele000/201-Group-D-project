@@ -1,32 +1,33 @@
 
 /**
-* Class: Item
+* Class: Weapon
 * @author Group D
 * @version 1.0
 * Course : CSE 201 Fall 2024
 *
-* Purpose: Represents a consumable item or weapon that the player stores in their inventory.
+* Purpose: Represents a consumable weapon that the player 
+* can equip to increase their damage. unequipped weapons are stored in player inventory
 */
-public class Item {
-	
-	
-	private String name; // the name of the item
-	
-	/**
-	 * Constructor that sets the item's name
-	 * @param name
-	 */
-	Item(String name){
-		this.name = name;
-	}
 
+public class Weapon extends Item {
+ 	int power;
 	
 	/**
-	 * Getter method for the item name
-	 * @return name
+	 * Constructor for weapon class.
+	 * @param name the weapon's name
+	 * @param power the weapon's power
 	 */
-	public String getName() {
-		return name;
+	Weapon(String name, int power){
+		super(name);
+		this.power = power;
+		
 	}
 	
+	/**
+	 * Returns the weapon's power
+	 * @return power
+	 */
+	public int getPower() {
+		return power;
+	}
 }
