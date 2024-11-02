@@ -40,7 +40,7 @@ public class Game {
              if (dungeon.getRoom().getType().equals("monster") && !gameIsOver && !dungeon.getRoom().isCleared()) { 
                 Enemy enemy = dungeon.getRoom().getEnemy();
                 battle(player, enemy, scanner);
-                dungeon.getRoom().clear();
+                dungeon.getRoom().clearRoom();
              }      
         } while (!gameIsOver);
         scanner.close();
