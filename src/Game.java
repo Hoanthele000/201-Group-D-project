@@ -90,7 +90,7 @@ public class Game {
                         break;
                 case "check inventory":
                         System.out.println("Your inventory contains: ");
-                        player.printInventory();
+                        player.printInventory(scanner);
                         break;
                  default:
                         System.out.println("Invalid action. Please choose again.");
