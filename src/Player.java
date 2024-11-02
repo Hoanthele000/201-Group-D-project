@@ -39,7 +39,7 @@ public class Player {
     public void damage(int damage) {
         health -= damage;
         if (health <= 0) {
-            System.out.println("You have been defeated!");
+    		System.out.println("You have been defeated!");
             gameOver();
         }
     }
@@ -49,16 +49,17 @@ public class Player {
      * Prints the contents of player's inventory and allows player to use an item
      */
     public void printInventory(Scanner scanner) {
-        int index = 0;
-        for (int i = 0; i < inventory.length; i++) {
+    	for (int i = 0; i < inventory.length; i++) {
         	if (inventory[i] != null) {
-        		System.out.print("slot "+ index + ": [  " + inventory[i].getName() + "  ]");
+        		System.out.print("slot "+ i + ": [  " + inventory[i].getName() + "  ]");
+    			System.out.println();
+    		} else {
+				System.out.print("slot "+ i + ": [    ]");
         		System.out.println();
-        		index++;
-        	}  		
+        	}      		
         }
         System.out.println("Enter the slot number of the item you would like to equip");
-        int choice = scanner.nextInt();
+        int choice = Integer.parseInt(scanner.nextLine());
         if (inventory[choice] != null) {
         	useItem(choice);
         }
@@ -87,7 +88,7 @@ public class Player {
      * @param index - the posistion of the item to be used.
      */
     public void useItem(int index) {
-        if (inventory[index].getName().equals("potion")) {
+        if (inventory[index].getName().equals("health potion")) {
     	    heal(10);
             inventory[index] = null;
         }
