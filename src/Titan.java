@@ -1,9 +1,11 @@
 /**
- * Class: Titan
- * Written: 1 Nov 2024
- * 
- * Purpose: Implementation of Titan monster
- */
+* Class: Titan
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Implementation of Enemy type Titan.
+*/
 public class Titan extends Enemy{
 	
 	// Constructor of Titan class
