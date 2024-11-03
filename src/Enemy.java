@@ -1,9 +1,11 @@
 /**
- * Class: Enemy
- * Written: 1 Nov 2024
- * 
- * Purpose: Implementation of Enemy
- */
+* Class: Enemy
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Implementation of Enemy with type and health.
+*/
 public class Enemy {
 	
 	// Variable for Enemy class
