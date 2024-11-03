@@ -80,7 +80,7 @@ public class Game {
                     	if ((enemy.health -= player.calculateDamage()) <= 0) {
                     		System.out.println("You defeated the " + enemy.type + "!" + " It dropped 100 gold and a health potion!");
                     		player.addGold(100); 
-				player.addItem(new Item("health potion");
+				player.addItem(new Item("health potion"));
                     		battleOver = true;
                 	} else {
                     		enemy.enemyAttacks(player);
