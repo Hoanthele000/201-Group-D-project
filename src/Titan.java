@@ -8,9 +8,11 @@
 */
 public class Titan extends Enemy{
 	
-	// Constructor of Titan class
+	/**
+	* Constructor of Titan class
+	*/
 	public Titan(String type) {
-		this.type = type;
+		Super(type);
 		this.health = 30;
 	}
 }
