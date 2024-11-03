@@ -12,7 +12,7 @@ import java.util.Scanner;
 */
 public class Player {
 	
-	String name; // player's name
+    String name; // player's name
     private int strength, vitality, intelligence, dexterity; // various stats to affect game actions
     private int health; // the player's health
     private int maxHealth; // the maximum health the player can hav
