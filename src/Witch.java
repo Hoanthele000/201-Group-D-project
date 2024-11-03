@@ -1,9 +1,11 @@
 /**
- * Class: Witch
- * Written: 1 Nov 2024
- * 
- * Purpose: Implementation of Witch monster
- */
+* Class: Witch
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Implementation of Enemy type Witch
+*/
 public class Witch extends Enemy{
 	
 	// Heal variable for Witch
