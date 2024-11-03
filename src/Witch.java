@@ -16,7 +16,7 @@ public class Witch extends Enemy{
 	*/
  	public Witch(String type) {
 		super(type);
-	
+	}
 	/**
 	 * Method to activate spell for Witch
 	 */
