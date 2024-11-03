@@ -1,9 +1,11 @@
 /**
- * Class: Undead
- * Written: 1 Nov 2024
- * 
- * Purpose: Implementation of Undead monster
- */
+* Class: Undead
+* @author Group D
+* @version 1.0
+* Course : CSE 201 Fall 2024
+*
+* Purpose: Implementation of Enemy type Undead
+*/
 public class Undead extends Enemy{
 	
 	// Life variable of Undead 
