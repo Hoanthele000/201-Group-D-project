@@ -11,8 +11,10 @@ public class Witch extends Enemy{
 	// Heal variable for Witch
 	int heal = 2;
 	
-	// Constructor for Witch class
-	public Witch(String type) {
+	/**
+ 	* Constructor for Witch class
+	*/
+ 	public Witch(String type) {
 		super(type);
 	
 	/**
