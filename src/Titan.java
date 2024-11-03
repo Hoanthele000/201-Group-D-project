@@ -12,7 +12,7 @@ public class Titan extends Enemy{
 	* Constructor of Titan class
 	*/
 	public Titan(String type) {
-		Super(type);
+		super(type);
 		this.health = 30;
 	}
 }
