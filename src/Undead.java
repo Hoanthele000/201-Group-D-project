@@ -22,7 +22,7 @@ public class Undead extends Enemy{
 	 */
 	public boolean isDead() {
 		if (this.health == 0 && life != 0) {
-			this.health == 20;
+			this.health = 20;
 			return false;
 		}
 		return true;
