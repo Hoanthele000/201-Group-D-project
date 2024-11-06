@@ -102,34 +102,34 @@ public class Store {
 	 * @return false if player is done shopping, true otherwise.
 	 */
 	private boolean buyItem(String choice, Player player, Scanner scanner) {		
-		if (validItem(choice)) {
-			System.out.println("How many would you like to buy?");
-            int quantity = Integer.parseInt(scanner.nextLine());
+	    if (validItem(choice)) {
+		System.out.println("How many would you like to buy?");
+           	int quantity = Integer.parseInt(scanner.nextLine());
                           
-            if (choice.equals("health potion")) {
-            	if (player.spendGold(quantity * 50)) {
-					System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
-            		for (int i = 0; i < quantity; i++) {
-                        player.addItem(new Item(choice));
-            		}
-                }
-            } else {
+           	if (choice.equals("health potion")) {
+            		if (player.spendGold(quantity * 50)) {
+				System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
+            			for (int i = 0; i < quantity; i++) {
+                        		player.addItem(new Item(choice));
+            			}
+                	}
+	    } else {
             	if (player.spendGold(quantity * 500)) {
-					System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
-            		player.addItem(new Weapon(choice, 5));
-                    System.out.println("Would you like to equip it? (yes/no)");
-                    boolean equipChoice = getYesNo(scanner);
-                    if (equipChoice) {
-                    	player.equipWeapon(new Weapon(choice,5));
-                        System.out.println("You equipped the " + choice + ".");
-                    }
+		   	System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
+            	    	player.addItem(new Weapon(choice, 5));
+                    	System.out.println("Would you like to equip it? (yes/no)");
+                    	boolean equipChoice = getYesNo(scanner);
+                    	if (equipChoice) {
+                    		player.equipWeapon(new Weapon(choice,5));
+                        	System.out.println("You equipped the " + choice + ".");
+                    	}	
                 }
-            }  
+	    }  
             System.out.println("Would you like to purchase anything else?\n \" Yes\" \n \" No \"");
             return getYesNo(scanner);
-		} else {
-			System.out.println("Invalid choice, try again");
-			return true;
+	    } else {
+		System.out.println("Invalid choice, try again");
+		return true;
 		}
 	}
 }
