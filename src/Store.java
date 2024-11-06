@@ -113,20 +113,20 @@ public class Store {
                         		player.addItem(new Item(choice));
             			}
                 	}
-	    } else {
-            	if (player.spendGold(quantity * 500)) {
-		   	System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
-            	    	player.addItem(new Weapon(choice, 5));
-                    	System.out.println("Would you like to equip it? (yes/no)");
-                    	boolean equipChoice = getYesNo(scanner);
-                    	if (equipChoice) {
-                    		player.equipWeapon(new Weapon(choice,5));
-                        	System.out.println("You equipped the " + choice + ".");
-                    	}	
-                }
-	    }  
-            System.out.println("Would you like to purchase anything else?\n \" Yes\" \n \" No \"");
-            return getYesNo(scanner);
+	    	} else {
+            		if (player.spendGold(quantity * 500)) {
+		   		System.out.println("You purchased " + quantity + " " + choice + "(s)."); 
+            	    		player.addItem(new Weapon(choice, 5));
+                    		System.out.println("Would you like to equip it? (yes/no)");
+                    		boolean equipChoice = getYesNo(scanner);
+                    		if (equipChoice) {
+                    			player.equipWeapon(new Weapon(choice,5));
+                        		System.out.println("You equipped the " + choice + ".");
+                    		}	
+                	}
+	    	}  
+            	System.out.println("Would you like to purchase anything else?\n \" Yes\" \n \" No \"");
+            	return getYesNo(scanner);
 	    } else {
 		System.out.println("Invalid choice, try again");
 		return true;
