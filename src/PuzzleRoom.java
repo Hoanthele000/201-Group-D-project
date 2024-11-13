@@ -76,6 +76,7 @@ public class PuzzleRoom extends Room {
 		System.out.println("It asks you,'what walks on 4 legs in the morning, 2 legs in the afternoon, and 3 legs at night?'");
 		if (answer("human", scanner, player)) {
 			reward(player, 1);
+			player.addHighScore(2500);
 		}
 		clearRoom();				
 	}
@@ -92,6 +93,7 @@ public class PuzzleRoom extends Room {
 		System.out.println("It asks you,'What is 5 + 3 * 4 + 10 / 5 - 2 * 3'");
 		if (answer("13", scanner, player)) {
 			reward(player, 2);
+			player.addHighScore(2500);
 		}
 		clearRoom();				
 	}
@@ -107,6 +109,7 @@ public class PuzzleRoom extends Room {
 				+ "I have a mouth but do not talk. What am I? '");
 		if (answer("river", scanner, player)) {
 			reward(player, 3);
+			player.addHighScore(2500);
 		}
 		clearRoom();				
 	}
@@ -120,6 +123,7 @@ public class PuzzleRoom extends Room {
 		System.out.println("It asks you,'who is the master of this dungeon? '");
 		if (answer("durlag", scanner, player)) {
 			reward(player, 4);
+			player.addHighScore(2500);
 		}
 		clearRoom();				
 	}
@@ -133,6 +137,7 @@ public class PuzzleRoom extends Room {
 		System.out.println("It asks you,'How many room does this dungeon contain? '");
 		if (answer("64", scanner, player)) {
 			reward(player, 5);
+			player.addHighScore(2500);
 		}
 		clearRoom();				
 	}
