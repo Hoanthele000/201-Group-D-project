@@ -116,7 +116,8 @@ public class Room {
 		    	System.out.println("You attack the " + enemy.type + " for " + player.calculateDamage() + " damage!");                      
                     	if ((enemy.health -= player.calculateDamage()) <= 0) {
                     		System.out.println("You defeated the " + enemy.type + "!" + " It dropped a health potion!");
-                    		player.addGold(100); 
+                    		player.addGold(100);
+				player.addHighScore(1000);
                     		player.addItem(new Item("health potion"));
                     		battleOver = true;
                 	} else {
