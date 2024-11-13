@@ -64,7 +64,7 @@ public class Dungeon {
                 System.out.println("You have quit the game.");
                 return true;
             default:
-                System.out.println("Invalid input. Please use W/A/S/D to move or Q to quit.");
+                System.out.println("Invalid input. Please use 'Up'/'Down'/'Left'/'Right' to move or 'Quit' to quit.");
                 break;
         }
         currentRoom = dungeon[col][row];
