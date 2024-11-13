@@ -19,6 +19,7 @@ public class Player {
     private Weapon equippedWeapon; // the wepon being used
     private int gold; 
     private Item[] inventory;
+    private int highScore = 0; // Player high score
 
     /**
      * Constructor for a player object, takes a name and race to initialize stats.
@@ -146,6 +147,23 @@ public class Player {
     	System.out.println("Equipped Weapon: " + equippedWeapon.getName());
       	System.out.println("Weapon Damage: " + equippedWeapon.getPower());
        	System.out.println("Gold: " + gold);
+    }
+
+	 /**
+     * Adds to the player's high score when an enemy is killed or a task is completed.
+     * @param points - the points to be added to the high score
+     */
+    public void addHighScore(int points) {
+        highScore += points;
+        System.out.println("High Score increased by " + points + ". Current High Score: " + highScore);
+    }
+
+    /**
+     * Returns the high score the player has
+     * @return the player's point total
+     */
+    public int getScore() {
+        return highScore;
     }
         
     /**
