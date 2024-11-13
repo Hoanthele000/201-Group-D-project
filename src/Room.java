@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
 * Class: Room
@@ -27,7 +28,37 @@ public class Room {
 		}
 		clear = "?";
 	}
+	
 
+	/**
+	 * Takes yes or no inputs from the user and returns a boolean.
+	 * @param scanner the input scanner
+	 * @return true if yes, false if no.
+	 */
+	 boolean getYesNo(Scanner scanner) {
+		boolean valid = true;
+		boolean result = false;
+        do {
+            String choice = scanner.nextLine();                           
+            switch (choice.toLowerCase()) {
+                case "yes":
+                    result = true;
+                    valid = true;
+                    break;
+                case "no":
+                    result = false;
+                    valid = true;
+                    break;
+                default:
+                    System.out.println("Invalid input, try again");
+                    valid = false;
+                    break;
+            } 
+        } while (valid == false);
+		return result;
+	}
+	      
+    
 	/**
 	 * Returns the enemy in the room
 	 * @return enemy
@@ -68,5 +99,58 @@ public class Room {
 			return true;
 		}
 		return false;
+	}
+	/**
+     * Allows a player to attack, flee or use items during battle.
+     * @param player the user's character
+     * @param enemy the enemy to battle
+     * @param scanner takes user inputs
+     */
+    static void battle(Player player, Enemy enemy, Scanner scanner) {
+        boolean battleOver = false;
+        while (!battleOver) {
+            printBattleInfo(player,enemy);
+            String action = scanner.nextLine().toLowerCase();
+            switch (action) {
+                case "attack":
+		    	System.out.println("You attack the " + enemy.type + " for " + player.calculateDamage() + " damage!");                      
+                    	if ((enemy.health -= player.calculateDamage()) <= 0) {
+                    		System.out.println("You defeated the " + enemy.type + "!" + " It dropped a health potion!");
+                    		player.addGold(100); 
+                    		player.addItem(new Item("health potion"));
+                    		battleOver = true;
+                	} else {
+                    		enemy.enemyAttacks(player);
+                	}
+                	break;
+                case "flee":
+                	battleOver = player.flee(enemy);
+                        break;
+                case "check inventory":
+                        System.out.println("Your inventory contains: ");
+                        player.printInventory(scanner);
+                        break;
+                 default:
+                        System.out.println("Invalid action. Please choose again.");
+                break;
+            }
+        }
+    }
+    
+    /**
+     * Prints the information for a battle.
+     * @param player the user's character
+     * @param enemy the enemy to battle
+     */
+    static void printBattleInfo(Player player, Enemy enemy) {
+        enemy.displayStats();
+        System.out.println("***************************************");
+        player.displayStats();
+        System.out.println("Choose action: Attack, Flee, Check Inventory");
+    }
+
+
+	public void enter(Player player, Scanner scanner) {
+		// do stuff in child classes		
 	}
 }
