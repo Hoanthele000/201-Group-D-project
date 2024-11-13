@@ -35,14 +35,37 @@ public class Game {
         store.storePhase(player, scanner); 
         // Game loop
         do {           
-            dungeon.printDungeon(); // Display the dungeon to the user and marks their location            
-            gameIsOver = dungeon.move(scanner); // Allow player to move
-            dungeon.getRoom.enter();      
+                dungeon.printDungeon(); // Display the dungeon to the user and marks their location            
+                gameIsOver = dungeon.move(scanner); // Allow player to move
+                dungeon.getRoom.enter();
+		betweenRooms(scanner, player);
         } while (!gameIsOver);
         scanner.close();
     }
 
-    
+  static void betweenRooms(Scanner scanner, Player player) {
+    	
+    	String input;
+    	 do {
+    		System.out.println("enter inventory to use inventory, stats to view your status, or move to continue to the next room");
+    		input = scanner.nextLine().toLowerCase();
+    		switch (input) {
+    			case "inventory":
+    				player.printInventory(scanner);
+    				break;
+    			case "stats":
+    				player.displayStats();
+    				break;
+    			case "move":
+    				break;
+    			default:
+    				System.out.println("invalid input, try again");
+    				break;
+    		}
+    	
+    	} while (!input.equals("move"));
+    }
+
     
     /**
      * Prints the information for a battle.
