@@ -37,11 +37,7 @@ public class Game {
         do {           
             dungeon.printDungeon(); // Display the dungeon to the user and marks their location            
             gameIsOver = dungeon.move(scanner); // Allow player to move
-             if (dungeon.getRoom().getType().equals("monster") && !gameIsOver && !dungeon.getRoom().isCleared()) { 
-                Enemy enemy = dungeon.getRoom().getEnemy();
-                battle(player, enemy, scanner);
-                dungeon.getRoom().clearRoom();
-             }      
+            dungeon.getRoom.enter();      
         } while (!gameIsOver);
         scanner.close();
     }
