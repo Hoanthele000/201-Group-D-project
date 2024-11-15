@@ -41,61 +41,8 @@ public class Game {
         } while (!gameIsOver);
         scanner.close();
     }
-
-
     
-    /**
-     * Prints the information for a battle.
-     * @param player the user's character
-     * @param enemy the enemy to battle
-     */
-    static void printBattleInfo(Player player, Enemy enemy) {
-    	// Display enemy and player stats
-        System.out.println("*******You have encountered an enemy!**********");
-        enemy.displayStats();
-        System.out.println("***************************************");
-        player.displayStats();
-        System.out.println("Choose action: Attack, Flee, Check Inventory");
-    }
-    
-    
-    /**
-     * Allows a player to attack, flee or use items during battle.
-     * @param player the user's character
-     * @param enemy the enemy to battle
-     * @param scanner takes user inputs
-     */
-    static void battle(Player player, Enemy enemy, Scanner scanner) {
-        boolean battleOver = false;
-        while (!battleOver) {
-            printBattleInfo(player,enemy);
-            String action = scanner.nextLine().toLowerCase();
-            switch (action) {
-                case "attack":
-		    	System.out.println("You attack the " + enemy.type + " for " + player.calculateDamage() + " damage!");                      
-                    	if ((enemy.health -= player.calculateDamage()) <= 0) {
-                    		System.out.println("You defeated the " + enemy.type + "!" + " It dropped 100 gold and a health potion!");
-                    		player.addGold(100);
-				player.addHighScore(1000);
-				player.addItem(new Item("health potion"));
-                    		battleOver = true;
-                	} else {
-                    		enemy.enemyAttacks(player);
-                	}
-                	break;
-                case "flee":
-                	battleOver = player.flee(enemy);
-                        break;
-                case "check inventory":
-                        System.out.println("Your inventory contains: ");
-                        player.printInventory(scanner);
-                        break;
-                 default:
-                        System.out.println("Invalid action. Please choose again.");
-                break;
-	    }
-        }
-    }
+   
 
     /**
 	 *  Calls playGame() to begin the game.
