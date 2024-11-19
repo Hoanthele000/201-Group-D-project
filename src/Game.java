@@ -37,12 +37,12 @@ public class Game {
         do {           
                 dungeon.printDungeon(); // Display the dungeon to the user and marks their location            
                 gameIsOver = dungeon.move(scanner); // Allow player to move
-                dungeon.getRoom.enter();
+                String type = dungeon.getRoom().type;
+                MonsterRoom room = new MonsterRoom();
+                room.enter(player, scanner);
         } while (!gameIsOver);
         scanner.close();
     }
-    
-   
 
     /**
 	 *  Calls playGame() to begin the game.
@@ -51,5 +51,5 @@ public class Game {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); 
         playGame(scanner);
-    }  
+    }
 }

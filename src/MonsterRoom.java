@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class MonsterRoom extends Room{
 
-	
 	MonsterRoom(){
 		super("monster");
 	}

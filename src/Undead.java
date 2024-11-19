@@ -21,8 +21,11 @@ public class Undead extends Enemy{
 	 * @return true if Undead has 0 life and false if > 0 life
 	 */
 	public boolean isDead() {
-		if (this.health == 0 && life != 0) {
-			this.health = 20;
+		if (this.health <= 0 && life == 1) {
+			System.out.println("Undead monster has a special ability to revive once after being defeated with a half health.");
+			this.health = 10;
+			return false;
+		} else if (this.health >= 0 || life == 2) {
 			return false;
 		}
 		return true;

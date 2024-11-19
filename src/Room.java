@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Scanner;
 */
 public class Room {
 	
-	Enemy enemy; // the enemy in the room, if any
+	Enemy[] enemy; // the enemy in the room, if any
 	String type; // healing, enemy, boss, could add more.
 	String clear; // shows a symbol based on whether the user has cleared the room.
 	
@@ -21,14 +22,13 @@ public class Room {
 	Room(String type){
 		this.type = type;
 		if (type.equals("monster")){
-			this.enemy = new Enemy("monster"); // should be altered when enemy class is finished
+			this.enemy = this.randEnemy(); // should be altered when enemy class is finished
 		}
 		if (type.equals("boss")){
-			this.enemy = new Enemy("Zargotrax, master of darkness"); // also to be altered with enemy class. should be a set boss
+			this.enemy = new Enemy[]{new Enemy("Zargotrax, master of darkness")}; // also to be altered with enemy class. should be a set boss
 		}
 		clear = "?";
 	}
-	
 
 	/**
 	 * Takes yes or no inputs from the user and returns a boolean.
@@ -63,7 +63,7 @@ public class Room {
 	 * Returns the enemy in the room
 	 * @return enemy
 	 */
-	public Enemy getEnemy() {
+	public Enemy[] getEnemy() {
 		return enemy;
 	}
 	
@@ -100,40 +100,50 @@ public class Room {
 		}
 		return false;
 	}
+	
+	public Enemy[] randEnemy() {
+    	Random rand = new Random();
+    	Enemy[] eneArr = new Enemy[rand.nextInt(3) + 1];
+    	for (int i = 0; i < eneArr.length; i++) {
+    		int num = rand.nextInt(3);
+    		if (num == 0) {
+    			eneArr[i] = new Titan("Titan");
+    		} else if (num == 1) {
+    			eneArr[i] = new Undead("Undead");
+    		} else {
+    			eneArr[i] = new Witch("Witch");
+    		}
+    	}
+    	return eneArr;
+    }
+	
 	/**
      * Allows a player to attack, flee or use items during battle.
      * @param player the user's character
      * @param enemy the enemy to battle
      * @param scanner takes user inputs
      */
-    static void battle(Player player, Enemy enemy, Scanner scanner) {
+    static void battle(Player player, Enemy[] enemy, Scanner scanner) {
         boolean battleOver = false;
         while (!battleOver) {
-            printBattleInfo(player,enemy);
+            int index = printBattleInfo(player,enemy);
+            Enemy ene = enemy[index];
             String action = scanner.nextLine().toLowerCase();
             switch (action) {
                 case "attack":
-		    	System.out.println("You attack the " + enemy.type + " for " + player.calculateDamage() + " damage!");                      
-                    	if ((enemy.health -= player.calculateDamage()) <= 0) {
-                    		System.out.println("You defeated the " + enemy.type + "!" + " It dropped a health potion!");
-                    		player.addGold(100);
-				player.addHighScore(1000);
-                    		player.addItem(new Item("health potion"));
-                    		battleOver = true;
-                	} else {
-                    		enemy.enemyAttacks(player);
-                	}
+                	fight(player, ene);
+                	battleOver = checkClear(enemy);
                 	break;
                 case "flee":
-                	battleOver = player.flee(enemy);
-                        break;
+                	battleOver = player.flee(ene);
+                    break;
                 case "check inventory":
-                        System.out.println("Your inventory contains: ");
-                        player.printInventory(scanner);
-                        break;
+                    System.out.println("Your inventory contains: ");
+                    player.printInventory(scanner);
+                    break;
                  default:
-                        System.out.println("Invalid action. Please choose again.");
-                break;
+                    System.out.println("Invalid action. Please choose again.");
+                    break;
             }
         }
     }
@@ -143,14 +153,77 @@ public class Room {
      * @param player the user's character
      * @param enemy the enemy to battle
      */
-    static void printBattleInfo(Player player, Enemy enemy) {
-        enemy.displayStats();
+    static int printBattleInfo(Player player, Enemy[] enemy) {
+        for (int i = 0, j = 1; i < enemy.length; i++, j++) {
+        	System.out.print(j + ": ");
+        	enemy[i].displayStats();
+        }
+        Scanner scan = new Scanner(System.in);
+        int index = 0;
         System.out.println("***************************************");
         player.displayStats();
+        while (true) {
+        	System.out.println("Choose one monster(1, 2, 3, etc.)");
+            int pos = Integer.parseInt(scan.nextLine());
+            pos--;
+            if (pos < enemy.length && pos >= 0) {
+            	index = pos;
+            	break;
+            } else {
+            	System.out.println("Invalid input");
+            }
+        }
         System.out.println("Choose action: Attack, Flee, Check Inventory");
+        return index;
     }
 
+    static void fight(Player player, Enemy ene) {
+    	if (ene.type == "Titan") { 
+    		System.out.println("Titan monster have higher health than other monster type.");
+    	}
+    	if (ene.type == "Witch") {
+			System.out.println("Wicth monster has a special ability to recover 2 HP after being attacked.");
+    	}
+    	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!");  
+        if ((ene.health -= player.calculateDamage()) <= 0) {
+        	if (ene.type != "Undead") {
+        		System.out.println("You defeated the " + ene.type + "!" + " It dropped a health potion!");
+            	player.addGold(100);
+            	player.addHighScore(1000);
+            	player.addItem(new Item("health potion"));
+        	}
+    	} else {
+    		if (ene.type == "Witch") {
+    			Witch wit = (Witch) ene;
+    			wit.spell();
+        	}
+        	ene.enemyAttacks(player);
+    	}
+    }
 
+    static boolean checkClear(Enemy[] enemy) {
+    	boolean check = true;
+    	for (int i = 0; i < enemy.length; i++) {
+    		if (enemy[i].type == "Undead") {
+    			Undead un = (Undead) enemy[i];
+    			if (un.health <= 0) {
+    				un.life--;
+    			}
+     			if (!un.isDead()) {
+    				check = false;
+    			}
+    		} else {
+    			if (enemy[i].health != 0) {
+    				check = false;
+    			}
+    		}
+    	}
+    	if (check == true) {
+    		System.out.println("Congratulation! You cleared all monsters in the room!"); 
+    	}
+    	return check;
+    }
+    
 	public void enter(Player player, Scanner scanner) {
 		// do stuff in child classes		
 	}

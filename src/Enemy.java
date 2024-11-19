@@ -6,6 +6,9 @@
 *
 * Purpose: Implementation of Enemy with type and health.
 */
+
+import java.util.Random;
+
 public class Enemy {
 	
 	// Variable for Enemy class
@@ -34,7 +37,7 @@ public class Enemy {
          */
         public void enemyAttacks(Player player) {
             if (player.dodgeAttack()) {
-                System.out.println("You dodged the attack!");
+                System.out.println("You dodged the attack of the enemy!");
             } else {
                 System.out.println("The enemy attacks you!");
                 player.damage(5); // Fixed enemy damage for now
@@ -44,4 +47,5 @@ public class Enemy {
                 }
             }
         }
-    }
+ 
+}
