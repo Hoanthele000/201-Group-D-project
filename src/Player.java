@@ -275,4 +275,13 @@ public class Player {
 	public int getHealth() {
 		return health;
 	}
+	
+	/**
+	* Returns the playe intelligence
+	* @return intelligence
+	*/
+	public int getIntelligence() {
+		return intelligence;
+	}
+	
 }
