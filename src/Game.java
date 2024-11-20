@@ -38,7 +38,7 @@ public class Game {
         boolean clue2 = false;
         
     	System.out.println("You come home from the library and something doesn't seem right.");
-        System.out.println("Coming up to the door you notice ito's slightly ajar.\n\n");
+        System.out.println("Coming up to the door you notice it's slightly ajar.\n\n");
         System.out.println("You race into the bedroom and check the safe for your precious dagger...\n");
         System.out.println("IT'S GONE!!!!!\n\n");
         System.out.println("What do you want to do?");
