@@ -15,6 +15,11 @@ public class Undead extends Enemy{
 	public Undead(String type) {
 		super(type);
 	}
+
+	public void damage(int damage){
+		this.health -= damage;
+		alive = !isDead();
+	}
 	
 	/**
 	 * Method to check number of life of Undead
