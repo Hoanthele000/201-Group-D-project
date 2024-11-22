@@ -188,7 +188,7 @@ public class Room {
     	}
     	if (ene.type == "Witch") {
 		System.out.println("Witches have the ability to recover 2 HP after being attacked.");
-		ene.spell();
+		((Witch) ene).spell();
     	}
     	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!"); 
 	ene.damage(player.calculateDamage());
