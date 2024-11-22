@@ -184,19 +184,15 @@ public class Room {
     	if (ene.type == "Witch") {
 			System.out.println("Wicth monster has a special ability to recover 2 HP after being attacked.");
     	}
-    	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!");  
-        if ((ene.health -= player.calculateDamage()) <= 0) {
-        	if (ene.type != "Undead") {
-        		System.out.println("You defeated the " + ene.type + "!" + " It dropped a health potion!");
+    	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!"); 
+	ene.health -= player.calculateDamage()
+        if (ene.isDead()) {      	
+        	System.out.println("You defeated the " + ene.type + "!" + " It dropped a health potion!");
             	player.addGold(100);
             	player.addHighScore(1000);
             	player.addItem(new Item("health potion"));
-        	}
+        	
     	} else {
-    		if (ene.type == "Witch") {
-    			Witch wit = (Witch) ene;
-    			wit.spell();
-        	}
         	ene.enemyAttacks(player);
     	}
     }
@@ -204,19 +200,9 @@ public class Room {
     static boolean checkClear(Enemy[] enemy) {
     	boolean check = true;
     	for (int i = 0; i < enemy.length; i++) {
-    		if (enemy[i].type == "Undead") {
-    			Undead un = (Undead) enemy[i];
-    			if (un.health <= 0) {
-    				un.life--;
-    			}
-     			if (!un.isDead()) {
-    				check = false;
-    			}
-    		} else {
-    			if (enemy[i].health != 0) {
-    				check = false;
-    			}
-    		}
+    		if (!enemy[i].isDead()) {
+    			check = false;
+    		} 
     	}
     	if (check == true) {
     		System.out.println("Congratulation! You cleared all monsters in the room!"); 
