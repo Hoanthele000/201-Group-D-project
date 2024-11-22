@@ -94,6 +94,18 @@ public class Store {
 	}
 
 	
+	private int getInt(Scanner scanner) {
+		int result = -1;
+		while (result == -1) {
+			try {
+				result = Integer.parseInt(scanner.nextLine());
+	    	} catch(NumberFormatException e) {
+	    		System.out.println("Invalid input");
+	    	}
+		}
+		return result;
+		
+	}
 	/**
 	 * Handles item purchasing, and adds/ equips items as necessary.
 	 * @param choice the user's choice
@@ -104,7 +116,7 @@ public class Store {
 	private boolean buyItem(String choice, Player player, Scanner scanner) {		
 	    if (validItem(choice)) {
 		System.out.println("How many would you like to buy?");
-           	int quantity = Integer.parseInt(scanner.nextLine());
+           	int quantity = getInt(scanner);
                           
            	if (choice.equals("health potion")) {
             		if (player.spendGold(quantity * 50)) {
@@ -133,3 +145,4 @@ public class Store {
 		}
 	}
 }
+
