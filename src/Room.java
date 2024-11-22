@@ -185,8 +185,8 @@ public class Room {
 			System.out.println("Wicth monster has a special ability to recover 2 HP after being attacked.");
     	}
     	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!"); 
-	ene.health -= player.calculateDamage()
-        if (ene.isDead()) {      	
+	ene.damage(player.calculateDamage());
+        if (!ene.alive()) {      	
         	System.out.println("You defeated the " + ene.type + "!" + " It dropped a health potion!");
             	player.addGold(100);
             	player.addHighScore(1000);
@@ -200,7 +200,7 @@ public class Room {
     static boolean checkClear(Enemy[] enemy) {
     	boolean check = true;
     	for (int i = 0; i < enemy.length; i++) {
-    		if (!enemy[i].isDead()) {
+    		if (enemy[i].alive()) {
     			check = false;
     		} 
     	}
