@@ -126,7 +126,7 @@ public class Room {
     static void battle(Player player, Enemy[] enemy, Scanner scanner) {
         boolean battleOver = false;
         while (!battleOver) {
-            int index = printBattleInfo(player,enemy);
+            int index = printBattleInfo(player,enemy, scanner);
             Enemy ene = enemy[index];
             String action = scanner.nextLine().toLowerCase();
             switch (action) {
@@ -153,12 +153,12 @@ public class Room {
      * @param player the user's character
      * @param enemy the enemy to battle
      */
-    static int printBattleInfo(Player player, Enemy[] enemy) {
+    static int printBattleInfo(Player player, Enemy[] enemy, Scanner scan) {
         for (int i = 0, j = 1; i < enemy.length; i++, j++) {
         	System.out.print(j + ": ");
         	enemy[i].displayStats();
         }
-        Scanner scan = new Scanner(System.in);
+
         int index = 0;
         System.out.println("***************************************");
         player.displayStats();
@@ -166,7 +166,7 @@ public class Room {
         	System.out.println("Choose one monster(1, 2, 3, etc.)");
             int pos = Integer.parseInt(scan.nextLine());
             pos--;
-            if (pos < enemy.length && pos >= 0) {
+            if (pos < enemy.length && pos >= 0 && enemy[pos].alive()) {
             	index = pos;
             	break;
             } else {
@@ -182,7 +182,8 @@ public class Room {
     		System.out.println("Titan monster have higher health than other monster type.");
     	}
     	if (ene.type == "Witch") {
-			System.out.println("Wicth monster has a special ability to recover 2 HP after being attacked.");
+		System.out.println("Witches have the ability to recover 2 HP after being attacked.");
+		ene.spell();
     	}
     	System.out.println("You attack the " + ene.type + " for " + player.calculateDamage() + " damage!"); 
 	ene.damage(player.calculateDamage());
