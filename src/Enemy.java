@@ -32,7 +32,8 @@ public class Enemy {
 		public void damage(int damage){
 			this.health -= damage;
 			if (health <= 0){
-			alive = False;
+				alive = False;
+			}
 		}
 			
         /**
