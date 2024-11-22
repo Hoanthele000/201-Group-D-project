@@ -7,7 +7,7 @@
 * Purpose: Implementation of Enemy with type and health.
 */
 
-import java.util.Random;
+
 
 public class Enemy {
 	
@@ -22,7 +22,7 @@ public class Enemy {
         public Enemy(String type) {
             this.type = type;
             this.health = 20; // Default health for all enemies
-	this.alive = True;
+            this.alive = true;
         }
 
 		public boolean alive() {
@@ -32,7 +32,7 @@ public class Enemy {
 		public void damage(int damage){
 			this.health -= damage;
 			if (health <= 0){
-				alive = False;
+				alive = false;
 			}
 		}
 			
