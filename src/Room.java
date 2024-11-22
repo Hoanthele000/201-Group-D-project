@@ -164,14 +164,19 @@ public class Room {
         player.displayStats();
         while (true) {
         	System.out.println("Choose one monster(1, 2, 3, etc.)");
-            int pos = Integer.parseInt(scan.nextLine());
-            pos--;
-            if (pos < enemy.length && pos >= 0 && enemy[pos].alive()) {
-            	index = pos;
-            	break;
-            } else {
-            	System.out.println("Invalid input");
-            }
+        	try {
+        		int pos = Integer.parseInt(scan.nextLine());
+                	pos--;
+                	if (pos < enemy.length && pos >= 0 && enemy[pos].alive()) {
+                		index = pos;
+                		break;
+                	} else {
+                		System.out.println("Invalid input");
+                	}
+        	} catch(NumberFormatException e) {
+        		System.out.println("Invalid input");
+        	}
+            
         }
         System.out.println("Choose action: Attack, Flee, Check Inventory");
         return index;
