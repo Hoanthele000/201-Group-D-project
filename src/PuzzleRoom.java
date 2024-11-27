@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+
+/**
+ * Class: PuzzleRoom
+ * @author Group D
+ * @version 1.0
+ * Course : CSE 201 Fall 2024
+ * 
+ * Purpose: gives a player a riddle, then rewards or punsihes the player.
+ */
 import java.util.Random;
 public class PuzzleRoom extends Room {
 
@@ -42,7 +51,11 @@ public class PuzzleRoom extends Room {
 		}
 	}
 	
-	
+	/**
+	 * Grants player a reward in the form of gold, healing, or a weapon.
+	 * @param player user's character
+	 * @param check determines reward based on puzzle solved
+	 */
 	public void reward(Player player, int check ) {
 		switch (check) {
 		case 1:
