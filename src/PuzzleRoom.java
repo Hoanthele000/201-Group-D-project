@@ -51,14 +51,15 @@ public class PuzzleRoom extends Room {
 			break;
 		case 2:
 			System.out.println("Before you leave, it heals all your wounds");
-			player.heal(20); // fully heals player.
+			player.heal(50); // fully heals player.
 			break;
 		case 3:
 			System.out.println("It offers you a black spear that glitters in your hands before you store it in your inventory");
 			player.addItem(new Weapon("Spear of the sphinx", player.calculateDamage())); // grants player a powerful weapon.
 			break;
 		case 4:
-			System.out.println("The sphinx tells you that the ruler of this dungeon reside in the upper right corner of the dungeon.");		
+			System.out.println("It offers you a black bow that glitters in your hands before you store it in your inventory");
+			player.addItem(new Weapon("Spear of the sphinx", player.calculateDamage())); // grants player a powerful weapon.
 			break;
 		default:
 			System.out.println("It offers you a sack full of gold as you leave");
