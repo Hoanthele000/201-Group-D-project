@@ -87,7 +87,7 @@ public class Game {
         // Game loop
         do {
             dungeon.printDungeon(); // Display the dungeon to the user and marks their location
-            gameIsOver = dungeon.move(scanner); // Allow player to move
+            gameIsOver = dungeon.move(player, scanner); // Allow player to move
             dungeon.getRoom().enter(player, scanner);
         } while (!gameIsOver);
         scanner.close();
