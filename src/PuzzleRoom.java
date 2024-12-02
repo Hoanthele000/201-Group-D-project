@@ -72,7 +72,7 @@ public class PuzzleRoom extends Room {
 			break;
 		case 4:
 			System.out.println("It offers you a black bow that glitters in your hands before you store it in your inventory");
-			player.addItem(new Weapon("Spear of the sphinx", player.calculateDamage())); // grants player a powerful weapon.
+			player.addItem(new Weapon("Bow of the sphinx", player.calculateDamage())); // grants player a powerful weapon.
 			break;
 		default:
 			System.out.println("It offers you a sack full of gold as you leave");
