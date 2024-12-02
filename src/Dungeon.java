@@ -31,7 +31,7 @@ public class Dungeon {
         row = 0;
         currentRoom = dungeon[col][row];
         dungeon[0][4] = new Room("boss");
-        dungeon[2][2] = new HealingRoom;
+        dungeon[2][2] = new HealingRoom();
         dungeon[2][1] = new PuzzleRoom();
         dungeon[3][3] = new PuzzleRoom();
         dungeon[1][0] = new PuzzleRoom();
