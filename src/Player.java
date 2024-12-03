@@ -30,6 +30,7 @@ public class Player {
         this.name = name;
         this.gold = 1000;
         this.inventory = new Item[15];
+        this.equippedWeapon = new Weapon("none", 0);
         initializeStats(race);
     }
 
