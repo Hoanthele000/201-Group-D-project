@@ -104,6 +104,10 @@ public class Room {
         return false;
     }
 
+    /**
+     * generates random enemies
+     * @return the list of enemies
+     */
     public Enemy[] randEnemy() {
         Random rand = new Random();
         Enemy[] eneArr = new Enemy[rand.nextInt(3) + 1];
@@ -126,7 +130,7 @@ public class Room {
      * @param enemy the enemy to battle
      * @param scanner takes user inputs
      */
-    static void battle(Player player, Enemy[] enemy, Scanner scanner) {
+    void battle(Player player, Enemy[] enemy, Scanner scanner) {
         boolean battleOver = false;
         while (!battleOver) {
             int index = printBattleInfo(player,enemy, scanner);
@@ -138,10 +142,12 @@ public class Room {
                     battleOver = checkClear(enemy);
                     break;
                 case "flee":
-                    if (player.flee(ene)) {
+                    if (type.equals("boss")) {
+                        System.out.println("You can not flee from this battle");                       
+                    } else if (player.flee(ene)) {
                         System.out.println("You have successfully fled the room!");
                         battleOver = true;
-                    }
+                    } 
                     break;
                 case "check inventory":
                     System.out.println("Your inventory contains: ");
@@ -188,6 +194,11 @@ public class Room {
         return index;
     }
 
+    /**
+     * Handles damage dealing and item drops.
+     * @param player the player character
+     * @param ene the enemy
+     */
     static void fight(Player player, Enemy ene) {
         if (ene.type == "Titan") {
             System.out.println("Titan monster have higher health than other monster type.");
@@ -209,6 +220,11 @@ public class Room {
         }
     }
 
+    /**
+     * checks if all enemies are dead.
+     * @param enemy
+     * @return
+     */
     static boolean checkClear(Enemy[] enemy) {
         boolean check = true;
         for (int i = 0; i < enemy.length; i++) {
@@ -222,6 +238,11 @@ public class Room {
         return check;
     }
 
+    /**
+     * Boss room 
+     * @param player the player character
+     * @param scanner takes user inputs
+     */
     public void enter(Player player, Scanner scanner) {
         if (isCleared()) {
             System.out.println("As you enter the empty room, you can't help but feel a sense of deja vu.");
