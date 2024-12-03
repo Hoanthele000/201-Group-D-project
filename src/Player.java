@@ -62,7 +62,7 @@ public class Player {
         }
         System.out.println("Enter the slot number of the item you would like to equip");
         int choice = Integer.parseInt(scanner.nextLine());
-        if (inventory[choice] != null) {
+        if (choice < 15 && choice >= 0 && inventory[choice] != null) {
             useItem(choice);
         }
     }
