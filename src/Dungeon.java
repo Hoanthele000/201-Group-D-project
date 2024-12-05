@@ -20,7 +20,7 @@ public class Dungeon {
     /**
      * Constructor for the dungeon.
      */
-    Dungeon() {
+    public Dungeon() {
         for (int i = 0; i < dungeon.length; i++) {
             for (int j = 0; j < dungeon[i].length; j++) {
                 dungeon[i][j] = new MonsterRoom();
