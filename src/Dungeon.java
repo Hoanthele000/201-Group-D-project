@@ -14,8 +14,8 @@ public class Dungeon {
     Room[][] dungeon = new Room[5][5]; // 2d array of rooms that represents the dungeon
     int col; // the current column of the player
     int row; // the current row of the player
-    Room currentRoom; //the room the player is in
-
+    Room currentRoom; // the room the player is in
+    Store dungeonStore; // the dungeon store
 
     /**
      * Constructor for the dungeon.
@@ -36,21 +36,22 @@ public class Dungeon {
         dungeon[3][3] = new PuzzleRoom();
         dungeon[1][0] = new PuzzleRoom();
         dungeon[4][3] = new PuzzleRoom();
+        dungeon[2][3] = new Room("store"); // Add a room for the dungeon store at [2][3]
         dungeon[0][4].enemy = new Enemy[]{new Boss()};
         currentRoom.clearRoom();
+        dungeonStore = new Store();
     }
-
 
     /**
      * Handles movement inputs to move the player between rooms.
+     * @param player the user's character
      * @param scanner takes user inputs
      * @return returns false if the user chooses to quit, true otherwise.
      */
-    public boolean move(Scanner scanner){
+    public boolean move(Player player, Scanner scanner) {
         // Get player input
         System.out.println("Move your character ('Up'/'Down'/'Left'/'Right' to move, 'Quit' to quit): ");
         String mov = scanner.nextLine().toLowerCase();
-
 
         // Update player position based on input
         switch (mov) {
@@ -74,7 +75,21 @@ public class Dungeon {
                 break;
         }
         currentRoom = dungeon[col][row];
+        // Check if the player enters the dungeon store location
+        if (col == 2 && row == 3) {
+            openDungeonStore(player, scanner);
+        }
         return false;
+    }
+
+    /**
+     * Opens the dungeon store
+     * @param player the user's character
+     * @param scanner takes user inputs
+     */
+    private void openDungeonStore(Player player, Scanner scanner) {
+        System.out.println("You have found a hidden dungeon store!");
+        dungeonStore.storePhase(player, scanner);
     }
 
     /**
@@ -86,7 +101,7 @@ public class Dungeon {
     }
 
     /**
-     * prints the dungeon grid with ? being unexplored rooms and ! being cleared rooms
+     * Prints the dungeon grid with ? being unexplored rooms and ! being cleared rooms
      */
     public void printDungeon() {
         for (int i = 0; i < dungeon.length; i++) {
